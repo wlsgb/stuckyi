@@ -17,8 +17,25 @@ mybatis:
   type-aliases-package: com.stuckyi.model
   mapper-locations: classpath:mapper/**/*.xml
 
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  level:
+    org:
+      springframework: DEBUG
 ---
 # local
 debug: true
 spring:
   profiles: local
+
+logging:
+  pattern:
+    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+    rolling-file-name: "D:/DEV/logs/stuckyi/app.%d{yyyy-MM-dd}.%i"
+  file:
+    name: D:/DEV/logs/stuckyi/app.log
+    max-history: 30
+  level:
+    org:
+      springframework: INFO
