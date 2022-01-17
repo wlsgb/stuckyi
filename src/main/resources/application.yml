@@ -1,0 +1,41 @@
+server:
+  port: 80
+
+spring:
+  profiles:
+    active: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/stukyi?serverTimezone=UTC
+    username: stukyi
+    password: 1234
+
+# MyBatis
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.stuckyi.model
+  mapper-locations: classpath:mapper/**/*.xml
+
+logging:
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+  level:
+    org:
+      springframework: DEBUG
+---
+# local
+debug: true
+spring:
+  profiles: local
+
+logging:
+  pattern:
+    file: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
+    rolling-file-name: "D:/DEV/logs/stuckyi/app.%d{yyyy-MM-dd}.%i"
+  file:
+    name: D:/DEV/logs/stuckyi/app.log
+    max-history: 30
+  level:
+    org:
+      springframework: INFO
